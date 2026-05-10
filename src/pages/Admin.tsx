@@ -178,23 +178,7 @@ export default function Admin() {
 
   return (
     <div className="min-h-screen bg-[var(--bg-deep)] pt-16">
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-56 shrink-0 min-h-[calc(100vh-64px)] border-r border-[var(--glass-border)] bg-[var(--bg-mid)] p-4 hidden lg:block">
-          <p className="text-xs text-[var(--text-muted)] uppercase tracking-wider mb-4 px-2">Admin Panel</p>
-          {[
-            { label: 'Overview', icon: TrendingUp },
-            { label: 'Users', icon: Users },
-            { label: 'Trips', icon: Map },
-          ].map(({ label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-[var(--text-muted)] hover:text-[var(--text-primary)] hover:bg-[rgba(29,84,109,0.2)] cursor-pointer transition-colors mb-1">
-              <Icon size={14} /> {label}
-            </div>
-          ))}
-        </aside>
-
-        {/* Main */}
-        <div className="flex-1 p-6 overflow-auto">
+      <div className="p-6">
           <h1 className="font-display text-2xl text-[var(--text-primary)] mb-6">Admin Dashboard</h1>
 
           {/* KPI cards */}
@@ -289,7 +273,6 @@ export default function Admin() {
               </table>
             </div>
           </div>
-        </div>
       </div>
     </div>
   )

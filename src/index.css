@@ -223,3 +223,20 @@ body {
 @media (min-width: 640px) { .masonry { columns: 2; } }
 @media (min-width: 1024px) { .masonry { columns: 3; } }
 .masonry > * { break-inside: avoid; margin-bottom: 20px; }
+
+/* Shadow utilities */
+.shadow-glass {
+  box-shadow: 0 8px 32px rgba(28, 43, 54, 0.12);
+}
+[data-theme="dark"] .shadow-glass {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+.shadow-glow-gold {
+  box-shadow: 0 4px 20px rgba(196, 134, 42, 0.35);
+}
+
+/* Responsive sidebar offset */
+@media (max-width: 767px) {
+  /* On mobile the sidebar is hidden — remove left padding */
+  .sidebar-offset { padding-left: 0 !important; }
+}

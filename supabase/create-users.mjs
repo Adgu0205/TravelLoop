@@ -29,12 +29,12 @@ async function createUser({ email, password, name }) {
   // Insert into auth.users
   await client.query(`
     INSERT INTO auth.users (
-      id, email, encrypted_password, email_confirmed_at,
+      id, instance_id, email, encrypted_password, email_confirmed_at,
       created_at, updated_at, aud, role,
       raw_user_meta_data, raw_app_meta_data,
       is_super_admin, confirmation_token, recovery_token
     ) VALUES (
-      $1, $2, $3, $4,
+      $1, '00000000-0000-0000-0000-000000000000', $2, $3, $4,
       $4, $4, 'authenticated', 'authenticated',
       $5::jsonb, '{"provider":"email","providers":["email"]}'::jsonb,
       false, '', ''
@@ -46,6 +46,19 @@ async function createUser({ email, password, name }) {
     `SELECT id FROM auth.users WHERE email = $1`, [email]
   )
   const uid = rows[0].id
+
+  // Insert into auth.identities (required by GoTrue for email login)
+  await client.query(`
+    INSERT INTO auth.identities (
+      id, user_id, identity_data, provider,
+      last_sign_in_at, created_at, updated_at, provider_id
+    ) VALUES (
+      $1, $1,
+      jsonb_build_object('sub', $1::text, 'email', $2),
+      'email', $3, $3, $3, $2
+    )
+    ON CONFLICT DO NOTHING
+  `, [uid, email, now])
 
   // Insert into public.users
   await client.query(`
