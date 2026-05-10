@@ -1,7 +1,7 @@
 import { useState, useEffect, Suspense } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { motion } from 'framer-motion'
-import { Plus, Save, Eye, ArrowLeft, Clock, Tag } from 'lucide-react'
+import { Plus, Eye, ArrowLeft, Clock, Tag } from 'lucide-react'
 import { StopList, type StopWithCity } from '@/features/itinerary/StopList'
 import { Globe, type GlobeArc } from '@/features/globe/Globe'
 import { Modal } from '@/components/Modal'
@@ -9,7 +9,6 @@ import { supabase } from '@/lib/supabase'
 import { useCities } from '@/hooks/useCities'
 import toast from 'react-hot-toast'
 import type { Database } from '@/lib/supabase'
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 
 type Stop = StopWithCity
 type Activity = Database['public']['Tables']['activities']['Row']
